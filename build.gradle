@@ -87,6 +87,12 @@ subprojects {
         }
         minHeapSize = "512m"
         maxHeapSize = "512m"
+        afterSuite { desc, result ->
+          if (!desc.parent) { // will match the outermost suite
+            println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+            println "Report file: ${reports.html.entryPoint}"
+          }
+        }
       }
       jacoco {
         enabled = project.hasProperty('testCoverage')
