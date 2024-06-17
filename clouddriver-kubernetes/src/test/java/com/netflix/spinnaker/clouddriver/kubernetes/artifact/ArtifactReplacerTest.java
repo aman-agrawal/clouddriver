@@ -444,14 +444,6 @@ final class ArtifactReplacerTest {
     v1Container.addPortsItem(new V1ContainerPort().containerPort(80));
 
     return v1Container;
-
-    //    return new V1ContainerBuilder()
-    //        .withName("container")
-    //        .withImage(image)
-    //        .addNewPort()
-    //        .withContainerPort(80)
-    //        .endPort()
-    //        .build();
   }
 
   private KubernetesManifest getDeploymentWithContainer(V1Container container) {
@@ -483,29 +475,7 @@ final class ArtifactReplacerTest {
                                 .spec(
                                     new V1PodSpec()
                                         .containers(containers.stream().toList())
-                                        .initContainers(initContainers.stream().toList()))))
-            //            new V1DeploymentBuilder()
-            //                .withNewMetadata()
-            //                .withName("my-app-deployment")
-            //                .withLabels(ImmutableMap.of("app", "my-app"))
-            //                .endMetadata()
-            //                .withNewSpec()
-            //                .withReplicas(3)
-            //                .withNewSelector()
-            //                .withMatchLabels(ImmutableMap.of("app", "my-app"))
-            //                .endSelector()
-            //                .withNewTemplate()
-            //                .withNewMetadata()
-            //                .withLabels(ImmutableMap.of("app", "my-app"))
-            //                .endMetadata()
-            //                .withNewSpec()
-            //                .addAllToContainers(containers)
-            //                .addAllToInitContainers(initContainers)
-            //                .endSpec()
-            //                .endTemplate()
-            //                .endSpec()
-            //                .build()
-            );
+                                        .initContainers(initContainers.stream().toList())))));
     return gson.fromJson(deployment, KubernetesManifest.class);
   }
 
@@ -527,27 +497,7 @@ final class ArtifactReplacerTest {
                                                     new V1EnvFromSource()
                                                         .configMapRef(
                                                             new V1ConfigMapEnvSource()
-                                                                .name(configMapRef)))))))
-            //            new V1ReplicaSetBuilder()
-            //                .withNewMetadata()
-            //                .withName("my-app-deployment")
-            //                .endMetadata()
-            //                .withNewSpec()
-            //                .withReplicas(3)
-            //                .withNewTemplate()
-            //                .withNewSpec()
-            //                .addNewContainer()
-            //                .addNewEnvFrom()
-            //                .withNewConfigMapRef()
-            //                .withNewName(configMapRef)
-            //                .endConfigMapRef()
-            //                .endEnvFrom()
-            //                .endContainer()
-            //                .endSpec()
-            //                .endTemplate()
-            //                .endSpec()
-            //                .build()
-            );
+                                                                .name(configMapRef))))))));
     return gson.fromJson(deployment, KubernetesManifest.class);
   }
 }
