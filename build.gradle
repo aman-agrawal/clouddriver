@@ -87,6 +87,12 @@ subprojects {
         }
         minHeapSize = "512m"
         maxHeapSize = "512m"
+        afterSuite { desc, result ->
+          if (!desc.parent) { // will match the outermost suite
+            println "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+            println "Report file: ${reports.html.entryPoint}"
+          }
+        }
       }
       jacoco {
         enabled = project.hasProperty('testCoverage')
@@ -104,7 +110,7 @@ subprojects {
     repositories {
       mavenLocal()
        maven{
-        url "NEXUS_URL"
+        url "https://nexus1.opsmx.net/repository/maven-snapshots/"
           credentials {
                     username = "NEXUS_USERNAME"
                     password = "NEXUS_PASSWORD"
