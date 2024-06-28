@@ -39,15 +39,7 @@ import com.netflix.spinnaker.clouddriver.kubernetes.config.KubernetesAccountProp
 import com.netflix.spinnaker.clouddriver.kubernetes.config.KubernetesCachingPolicy;
 import com.netflix.spinnaker.clouddriver.kubernetes.config.LinkedDockerRegistryConfiguration;
 import com.netflix.spinnaker.clouddriver.kubernetes.config.RawResourcesEndpointConfig;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.AccountResourcePropertyRegistry;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.GlobalResourcePropertyRegistry;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.JsonPatch;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.KubernetesCoordinates;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.KubernetesPatchOptions;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.KubernetesPodMetric;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.KubernetesResourceProperties;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.KubernetesSpinnakerKindMap;
-import com.netflix.spinnaker.clouddriver.kubernetes.description.ResourcePropertyRegistry;
+import com.netflix.spinnaker.clouddriver.kubernetes.description.*;
 import com.netflix.spinnaker.clouddriver.kubernetes.description.manifest.KubernetesKind;
 import com.netflix.spinnaker.clouddriver.kubernetes.description.manifest.KubernetesKindProperties;
 import com.netflix.spinnaker.clouddriver.kubernetes.description.manifest.KubernetesManifest;
@@ -672,17 +664,6 @@ public class KubernetesCredentials {
   private <T> T runAndRecordMetrics(
       String action, List<KubernetesKind> kinds, String namespace, Supplier<T> op) {
     return op.get();
-    /**
-     * Commenting below to avoid flood of metrics on every kubernetes operation Map<String, String>
-     * tags = new HashMap<>(); tags.put("action", action); tags.put( "kinds",
-     * kinds.stream().map(KubernetesKind::toString).sorted().collect(Collectors.joining(",")));
-     * tags.put("account", accountName); tags.put("namespace", Strings.isNullOrEmpty(namespace) ?
-     * "none" : namespace); tags.put("success", "true"); long startTime = clock.monotonicTime(); try
-     * { return op.get(); } catch (RuntimeException e) { tags.put("success", "false");
-     * tags.put("reason", e.getClass().getSimpleName()); throw e; } finally { registry
-     * .timer(registry.createId("kubernetes.api", tags)) .record(clock.monotonicTime() - startTime,
-     * TimeUnit.NANOSECONDS); }
-     */
   }
 
   /**
