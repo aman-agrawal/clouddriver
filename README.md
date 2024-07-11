@@ -35,6 +35,3 @@ e458cd21087f54b0a9ece3dbe967edfafe98d001 | Yugandharkumar | Create commits-prese
 
 
 a81f01042740e1d03b403c8f66b274fcd17370df | Yugandharkumar | Rename Dockerfile-sleep to Dockerfile | 2024-05-20 
-
-
-1f993edfa3eca0c369cd770e644b9506b5e0e668 | Amir Alavi | feat(provider/kubernetes): support for kubectl server-side-apply strategy (#5989) | 2023-11-17 
